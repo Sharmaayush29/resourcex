@@ -25,10 +25,10 @@ UPLOAD_DIR = os.getenv("UPLOAD_DIR", "./uploads")
 ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "admin@waste2raw.com")
 ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin123")
 
-# CORS Origins
+# CORS Origins (allow Vercel, localhost, and any configured domains)
 _cors_raw = os.getenv(
     "CORS_ORIGINS",
-    "http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173"
+    "http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173,https://resourcex-32qn.vercel.app,*"
 )
 CORS_ORIGINS = [origin.strip() for origin in _cors_raw.split(",") if origin.strip()]
 

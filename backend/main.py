@@ -30,23 +30,18 @@ app = FastAPI(
 # Apply OWASP Defense-in-Depth HTTP Security Headers
 app.add_middleware(SecurityHeadersMiddleware)
 
-# Configurable CORS for React frontend & production domain
-if "*" in CORS_ORIGINS:
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origin_regex=".*",
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
-else:
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=CORS_ORIGINS,
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
+# Configurable CORS for React frontend & production domain (Vercel, localhost, and custom domains)
+clean_origins = [o for o in CORS_ORIGINS if o != "*"]
+allow_regex = r".*" if "*" in CORS_ORIGINS else r"https://.*\.vercel\.app|http://localhost(:\d+)?|http://127\.0\.0\.1(:\d+)?"
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origin_regex=allow_regex,
+    allow_origins=clean_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Serve uploaded files
 if os.path.exists(UPLOAD_DIR):
