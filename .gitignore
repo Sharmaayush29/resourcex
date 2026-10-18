@@ -1,0 +1,100 @@
+# ==============================================================================
+# Git Ignore Configuration for ReSourceX / Waste2Raw
+# High Security: Ensures zero secrets, credentials, databases, or binaries are committed
+# ==============================================================================
+
+# Environment files & Secrets
+.env
+.env.*
+.env.local
+!.env.example
+*.pem
+*.key
+*.cert
+*.crt
+*.pfx
+*.p12
+
+# Python & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+backend/venv/
+venv/
+.venv/
+env/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Databases & local SQLite storage
+*.db
+*.db-journal
+*.db.bak
+*.sqlite
+*.sqlite3
+backend/waste2raw.db
+backend/waste2raw.db.bak
+
+# User Uploads & Media (only track .gitkeep)
+backend/uploads/*
+!backend/uploads/.gitkeep
+backend/uploads/documents/*
+!backend/uploads/documents/.gitkeep
+backend/uploads/evidence/*
+!backend/uploads/evidence/.gitkeep
+backend/uploads/images/*
+!backend/uploads/images/.gitkeep
+
+# Node.js & Frontend dependencies / build output
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/.oxlintrc.local.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Logs & Scratch
+logs/
+*.log
+scratch/
+tmp/
+temp/
+
+# Operating System & IDE Files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.swo
+*~

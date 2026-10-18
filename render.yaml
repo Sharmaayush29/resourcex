@@ -1,0 +1,35 @@
+services:
+  # FastAPI Backend Service
+  - type: web
+    name: resourcex-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: 1440
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: ADMIN_EMAIL
+        value: admin@waste2raw.com
+      - key: ADMIN_PASSWORD
+        generateValue: true
+
+  # React Vite Frontend Static Site
+  - type: web
+    name: resourcex-frontend
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
